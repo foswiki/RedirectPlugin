@@ -22,7 +22,7 @@ package TWiki::Plugins::RedirectPlugin;
 use vars qw( $VERSION $RELEASE $debug $pluginName );
 use strict;
 
-$VERSION    = '$Rev: 17733 $';
+$VERSION    = '$Rev$';
 $RELEASE    = 'Dakar';
 $pluginName = 'RedirectPlugin';
 
