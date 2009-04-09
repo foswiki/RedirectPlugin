@@ -1,0 +1,4 @@
+data/System/RedirectPlugin.txt Documentation Topic
+lib/Foswiki/Plugins/RedirectPlugin.pm Plugin Modulde
+data/Sandbox/RedirectPluginTest.txt Test Topic
+data/Sandbox/RedirectPluginDestination.txt Test Topic

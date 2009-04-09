@@ -1,0 +1,75 @@
+%META:TOPICINFO{author="ProjectContributor" date="1182547552" format="1.1" version="$Rev$"}%
+<!--
+   * Set SHORTDESCRIPTION = Create a redirect to another topic or website
+-->
+---+!! Redirect Plugin
+
+%SHORTDESCRIPTION%
+
+I typically use this to make easy-to-type shortforms/acronyms of topic names.  For example:
+	* Actual content appears under =<nop>Main.LightweightDirectoryAccessProtocol=
+	* =<nop>Main.LDAP= contains just a redirect tag.  Referencing =<nop>Main.LDAP= anywhere or entering it in the _Jump_ box takes one directly to =<nop>Main.LightweightDirectoryAccessProtocol=
+
+%TOC%
+
+---++ Syntax Rules
+	* Redirect to a topic within the web: =%<nop>REDIRECT{"SomeTopic"}%=
+	* Redirect to a topic in another web: =%<nop>REDIRECT{"Someweb.SomeTopic"}%=
+	* Redirect to any URL: =%<nop>REDIRECT{"http://wikipedia.org/"}%=
+	* Pass parameters:
+	   * Url parameters are passed on: =http://%HTTP_HOST%/Main/TopicThatContainsARedirect?q=LDAP"}%=. The landing topic url will contain these parameters
+	   * Parameters can also be passed to the variable: =%<nop>REDIRECT{"Someweb.SomeTopic?q=LDAP"}%=
+	   * =REDIRECT= parameters override url parameters
+	
+---++ Prevent redirecting
+To view the topic that contains a =REDIRECT=, pass parameter =noredirect=on= to the url. For example:
+
+<pre>
+http://%HTTP_HOST%/Main/WebHome?noredirect=on
+</pre>	
+	
+---++ Wikipedia like "Redirected from..."
+A redirect now appends the =redirectedfrom= parameter to the url which contains the Web.Topic that the user has been redirected from. This allows us to display Wikipedia like "Redirected from ..." text on the destination topic. You can use the =%<nop>URLPARAM{redirectedfrom}%= variable to access the parameter and create the "Redirected from..." text. 
+
+Below is an example you can put in your template:
+
+<verbatim>
+%IF{ "$'URLPARAM{redirectedfrom}'" then="<span class='foswikiGrayText'>(Redirected from <a href='%SCRIPTURLPATH{view}%/%URLPARAM{redirectedfrom}%?noredirect=on'>%URLPARAM{redirectedfrom}%</a>)</span>"}%
+</verbatim>
+
+Which will display the following on topics that have been redirected:
+
+<span class="foswikiGrayText">(Redirected from <a href="?noredirect=on">Web.Topic</a>)</span>
+
+---++ Test topics
+If installed:
+	* Sandbox.RedirectPluginTest - this topic should redirect to landing page:
+	* Sandbox.RedirectPluginDestination
+
+---++ Installation Instructions
+
+%$INSTALL_INSTRUCTIONS%
+
+---++ Plugin Files
+
+   | *File:* | *Description:* |
+%$MANIFEST%
+
+---++ Plugin Info
+
+|  Plugin Author(s): | Foswiki:Main.AndrewJones |
+|  Previous Authos(s): | TWiki:Main/SteveMokris |
+|  License: | [[http://www.gnu.org/licenses/gpl.html][GPL (Gnu General Public License)]] |
+|  Plugin Release: | %$RELEASE% |
+|  Plugin Version: | %$VERSION% |
+|  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  09 Apr 2009: | Ported to Foswiki as 1.0; Update documentation - Foswiki:Main.AndrewJones |
+|  24 Nov 2008: | Ability to display Wikipedia like "Redirected from..." - Foswiki:Main.AndrewJones |
+|  22 Apr 2007: | Arthur Clemens: url parameters are now passed on. Adapted from TWiki:Main.JohnRouillard. |
+|  21 Apr 2007: | Arthur Clemens: fixed redirect to non-wiki word topics; added =noredirect=on= parameter; added support for TWiki:Codev.ShorterURLs. |
+|  10 Aug 2006: | Ability to redirect to URL restored by TWiki:Main/ThomasWeigert. Also added support for URL parameters. Fixed a few bugs. |
+|  09 Jun 2006: | Dakar port by TWiki:Main/MeredithLesley |
+|  20 Jun 2003: | Initial version |
+|  Dependencies: | %$DEPENDENCIES% |
+|  Plugin Home: | http://foswiki.org/Extensions/%TOPIC% |
+|  Support: | http://foswiki.org/Support/%TOPIC% |

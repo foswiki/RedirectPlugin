@@ -1,5 +1,6 @@
-# TWiki RedirectPlugin
+# Foswiki RedirectPlugin
 #
+# Copyright (C) 2008 - 2009 Andrew Jones, andrewjones86@gmail.com
 # Copyright (C) 2006 Motorola, thomas.weigert@motorola.com
 # Copyright (C) 2006 Meredith Lesly, msnomer@spamcop.net
 # Copyright (C) 2003 Steve Mokris, smokris@softpixel.com
@@ -16,40 +17,30 @@
 # http://www.gnu.org/copyleft/gpl.html
 
 # =========================
-package TWiki::Plugins::RedirectPlugin;
+package Foswiki::Plugins::RedirectPlugin;
 
 # =========================
-use vars qw( $VERSION $RELEASE $debug $pluginName );
+use vars
+  qw( $VERSION $RELEASE $SHORTDESCRIPTION $pluginName $NO_PREFS_IN_TOPIC );
+
 use strict;
 
-$VERSION    = '$Rev$';
-$RELEASE    = 'Dakar';
-$pluginName = 'RedirectPlugin';
+our $VERSION           = '$Rev$';
+our $RELEASE           = '1.0';
+our $SHORTDESCRIPTION  = 'Create a redirect to another topic or website.';
+our $NO_PREFS_IN_TOPIC = 1;
+our $pluginName        = 'RedirectPlugin';
 
 # =========================
 sub initPlugin {
     my ( $topic, $web, $user, $installWeb ) = @_;
 
-    # check for Plugins.pm versions
-    if ( $TWiki::Plugins::VERSION < 1.1 ) {
-        TWiki::Func::writeWarning(
-            "This version of $pluginName works only with TWiki 4 and greater.");
-        return 0;
-    }
-
     # this doesn't really have any meaning if we aren't being called as a CGI
-    my $query = &TWiki::Func::getCgiQuery();
+    my $query = &Foswiki::Func::getCgiQuery();
     return 0 unless $query;
 
-    # Get plugin debug flag
-    $debug = &TWiki::Func::getPreferencesFlag("\U$pluginName\E_DEBUG");
+    Foswiki::Func::registerTagHandler( 'REDIRECT', \&REDIRECT );
 
-    TWiki::Func::registerTagHandler( 'REDIRECT', \&REDIRECT );
-
-    # Plugin correctly initialized
-    &TWiki::Func::writeDebug(
-        "- TWiki::Plugins::$pluginName::initPlugin( $web.$topic ) is OK")
-      if $debug;
     return 1;
 }
 
@@ -57,16 +48,16 @@ sub initPlugin {
 sub REDIRECT {
     my ( $session, $params, $topic, $web ) = @_;
 
-    my $context     = TWiki::Func::getContext();
+    my $context     = Foswiki::Func::getContext();
     my $newWeb      = $web;
     my $newTopic    = '';
     my $anchor      = '';
     my $queryString = '';
     my $dest        = $params->{'newtopic'} || $params->{_DEFAULT};
 
-    my $webNameRegex  = TWiki::Func::getRegularExpression('webNameRegex');
-    my $wikiWordRegex = TWiki::Func::getRegularExpression('wikiWordRegex');
-    my $anchorRegex   = TWiki::Func::getRegularExpression('anchorRegex');
+    my $webNameRegex  = Foswiki::Func::getRegularExpression('webNameRegex');
+    my $wikiWordRegex = Foswiki::Func::getRegularExpression('wikiWordRegex');
+    my $anchorRegex   = Foswiki::Func::getRegularExpression('anchorRegex');
 
     # Redirect only on view
     # Support Codev.ShorterURLs: do not redirect on edit
@@ -76,7 +67,7 @@ sub REDIRECT {
         && !$context->{'preview'} )
     {
 
-        my $query = TWiki::Func::getCgiQuery();
+        my $query = Foswiki::Func::getCgiQuery();
 
         my $queryString = "";
         my $param;
@@ -89,14 +80,14 @@ sub REDIRECT {
         my $noredirect = $query->param( -name => 'noredirect' ) || '';
         return '' if $noredirect eq 'on';
 
-        $dest = TWiki::Func::expandCommonVariables( $dest, $topic, $web );
+        $dest = Foswiki::Func::expandCommonVariables( $dest, $topic, $web );
 
         # redirect to URL
         if ( $dest =~ m/^http/ ) {
 
             return "%BR% %RED% Cannot redirect to current topic %ENDCOLOR%"
-              if ( $dest eq TWiki::Func::getViewUrl( $web, $topic ) );
-            TWiki::Func::redirectCgiQuery( $query, $dest );
+              if ( $dest eq Foswiki::Func::getViewUrl( $web, $topic ) );
+            Foswiki::Func::redirectCgiQuery( $query, $dest );
             return '';
         }
 
@@ -111,7 +102,7 @@ sub REDIRECT {
             $topicLocation = "$newWeb.$newTopic";
         }
 
-        if ( !TWiki::Func::topicExists( undef, $topicLocation ) ) {
+        if ( !Foswiki::Func::topicExists( undef, $topicLocation ) ) {
             return
 "%RED% Could not redirect to topic $topicLocation (the topic does not seem to exist) %ENDCOLOR%";
         }
@@ -125,17 +116,16 @@ sub REDIRECT {
             #override url params
             $queryString = $1;
         }
-        
-	# AndrewJones: allow us to use %<nop>URLPARAM{redirectfrom}%
-	# in destination topic to display Wikipedia like "Redirected
-	# from ..." text
-	my $q = "?redirectedfrom=$web.$topic";
-	$q .= "&" . $queryString if $queryString;
+
+        # AndrewJones: allow us to use %<nop>URLPARAM{redirectfrom}%
+        # in destination topic to display Wikipedia like "Redirected
+        # from ..." text
+        my $q = "?redirectedfrom=$web.$topic";
+        $q .= "&" . $queryString if $queryString;
 
         # topic exists
-        TWiki::Func::redirectCgiQuery( $query,
-            TWiki::Func::getViewUrl( $newWeb, $newTopic ) . $anchor
-            . $q );
+        Foswiki::Func::redirectCgiQuery( $query,
+            Foswiki::Func::getViewUrl( $newWeb, $newTopic ) . $anchor . $q );
 
     }
 
