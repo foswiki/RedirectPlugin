@@ -1,0 +1,13 @@
+%TMPL:INCLUDE{"viewtopicactionbuttons"}%
+
+%TMPL:DEF{"no_redirect_extend_params"}%%IF{"$'URLPARAM{noredirect}'" then=";noredirect=%URLPARAM{noredirect}%"}%%TMPL:END%
+%TMPL:DEF{"no_redirect_new_params"}%%IF{"$'URLPARAM{noredirect}'" then="?noredirect=%URLPARAM{noredirect}%"}%%TMPL:END%
+
+
+%TMPL:DEF{"view_topic_link"}%<span><a href='%SCRIPTURL{"view"}%/%WEB%/%TOPIC%%TMPL:P{"no_redirect_new_params"}%' rel='nofollow' %MAKETEXT{"title='View topic' accesskey='v'>&View topic"}%</a></span>%TMPL:END%
+
+%TMPL:DEF{"history_rdiff_link"}%<span class="foswikiRequiresChangePermission"><a href='%SCRIPTURLPATH{"rdiff"}%/%WEB%/%TOPIC%?type=history%TMPL:P{"no_redirect_extend_params"}%' rel='nofollow' %MAKETEXT{"title='View total topic history' accesskey='h'>&History"}%</a></span>%TMPL:END%
+
+%TMPL:DEF{"history_history_link"}%<span class="foswikiRequiresChangePermission"><a href='%SCRIPTURLPATH{"oops"}%/%WEB%/%TOPIC%?template=oopshistory%TMPL:P{"no_redirect_extend_params"}%' rel='nofollow' %MAKETEXT{"title='View total topic history' accesskey='h'>&History"}%</a></span>%TMPL:END%
+
+%TMPL:DEF{"raw_link"}%<span><a href='%SCRIPTURLPATH{"view"}%/%WEB%/%TOPIC%?raw=on%TMPL:P{"no_redirect_extend_params"}%%REVARG%' rel='nofollow' %MAKETEXT{"title='View raw text without formatting' accesskey='r'>&Raw View"}%</a></span>%TMPL:END%
