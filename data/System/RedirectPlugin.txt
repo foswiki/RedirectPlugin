@@ -41,6 +41,21 @@ Which will display the following on topics that have been redirected:
 
 <span class="foswikiGrayText">(Redirected from <a href="?noredirect=on">Web.Topic</a>)</span>
 
+---++ Don't check that the target topic exists
+
+If you pass the dontcheck=1 parameter then Foswiki will let you redirect to a topic that doesn't exist. This is very useful as a way to wrap up data form creators for applications.
+
+e.g. !RoleCreator:
+
+<verbatim>
+%REDIRECT{newtopic="%SCRIPTURLPATH{"edit"}%/%BASEWEB%/UnnamedRoleAUTOINC1?topicparent=RoleList;templatetopic=RoleTemplate;t=%SERVERTIME{"$day$hour$min$sec"}%" dontCheck="1"}%
+</verbatim>
+
+Now, for instance in WebLeftBar you can just use:
+<pre>
+   * [[RoleCreator][Create Role]]
+</pre>
+
 ---++ Test topics
 If installed:
 	* Sandbox.RedirectPluginTest - this topic should redirect to landing page:
@@ -63,6 +78,7 @@ If installed:
 |  Plugin Release: | %$RELEASE% |
 |  Plugin Version: | %$VERSION% |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  07 Mar 2010: | Added facility to dontCheck destination topic exists - Foswiki:Main.MartinCleaver |
 |  09 Apr 2009: | Ported to Foswiki as 1.0; Update documentation - Foswiki:Main.AndrewJones |
 |  24 Nov 2008: | Ability to display Wikipedia like "Redirected from..." - Foswiki:Main.AndrewJones |
 |  22 Apr 2007: | Arthur Clemens: url parameters are now passed on. Adapted from TWiki:Main.JohnRouillard. |

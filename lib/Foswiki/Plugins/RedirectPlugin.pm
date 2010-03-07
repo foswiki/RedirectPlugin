@@ -54,6 +54,7 @@ sub REDIRECT {
     my $anchor      = '';
     my $queryString = '';
     my $dest        = $params->{'newtopic'} || $params->{_DEFAULT};
+    my $dontCheckDestinationExists = $params->{'dontCheck'} || 0; 
 
     my $webNameRegex  = Foswiki::Func::getRegularExpression('webNameRegex');
     my $wikiWordRegex = Foswiki::Func::getRegularExpression('wikiWordRegex');
@@ -102,10 +103,12 @@ sub REDIRECT {
             $topicLocation = "$newWeb.$newTopic";
         }
 
-        if ( !Foswiki::Func::topicExists( undef, $topicLocation ) ) {
-            return
-"%RED% Could not redirect to topic $topicLocation (the topic does not seem to exist) %ENDCOLOR%";
-        }
+        unless ($dontCheckDestinationExists) { 
+	    if ( !Foswiki::Func::topicExists( undef, $topicLocation ) ) {
+		return
+		    "%RED% Could not redirect to topic $topicLocation (the topic does not seem to exist) %ENDCOLOR%";
+	    }
+	}
 
         if ( $dest =~ /($anchorRegex)/ ) {
             $anchor = $1;
