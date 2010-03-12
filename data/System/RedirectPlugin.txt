@@ -78,7 +78,7 @@ If installed:
 |  Plugin Release: | %$RELEASE% |
 |  Plugin Version: | %$VERSION% |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
-|  07 Mar 2010: | Added facility to dontCheck destination topic exists - Foswiki:Main.MartinCleaver |
+|  07 Mar 2010: | Added facility to dontcheck destination topic exists - Foswiki:Main.MartinCleaver |
 |  09 Apr 2009: | Ported to Foswiki as 1.0; Update documentation - Foswiki:Main.AndrewJones |
 |  24 Nov 2008: | Ability to display Wikipedia like "Redirected from..." - Foswiki:Main.AndrewJones |
 |  22 Apr 2007: | Arthur Clemens: url parameters are now passed on. Adapted from TWiki:Main.JohnRouillard. |

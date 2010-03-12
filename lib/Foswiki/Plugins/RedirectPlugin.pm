@@ -54,7 +54,7 @@ sub REDIRECT {
     my $anchor      = '';
     my $queryString = '';
     my $dest        = $params->{'newtopic'} || $params->{_DEFAULT};
-    my $dontCheckDestinationExists = $params->{'dontCheck'} || 0; 
+    my $dontCheckDestinationExists = $params->{'dontcheck'} || 0; 
 
     my $webNameRegex  = Foswiki::Func::getRegularExpression('webNameRegex');
     my $wikiWordRegex = Foswiki::Func::getRegularExpression('wikiWordRegex');
