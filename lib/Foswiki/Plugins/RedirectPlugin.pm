@@ -26,7 +26,7 @@ use vars
 use strict;
 
 our $VERSION           = '$Rev$';
-our $RELEASE           = '1.0';
+our $RELEASE           = '1.1';
 our $SHORTDESCRIPTION  = 'Create a redirect to another topic or website.';
 our $NO_PREFS_IN_TOPIC = 1;
 our $pluginName        = 'RedirectPlugin';
@@ -73,8 +73,10 @@ sub REDIRECT {
         my $queryString = "";
         my $param;
         foreach my $param ( $query->param ) {
-            $queryString .= "&" if $queryString;
-            $queryString .= "$param=" . $query->param("$param");
+            foreach my $value ( $query->param("$param") ) {
+                $queryString .= "&" if $queryString;
+                $queryString .= "$param=" . $value;
+            }
         }
 
         # do not redirect when param "redirect=no" is passed
@@ -102,6 +104,11 @@ sub REDIRECT {
             # ignore anchor and params here
             $topicLocation = "$newWeb.$newTopic";
         }
+
+        return "%BR% %RED% Cannot redirect to current topic %ENDCOLOR%"
+          if ( $topicLocation eq "$web.$topic" );
+        return "%BR% %RED% Cannot redirect to an already visited topic %ENDCOLOR%"
+          if ( $queryString =~ /redirectedfrom=$topicLocation/ );
 
         unless ($dontCheckDestinationExists) { 
 	    if ( !Foswiki::Func::topicExists( undef, $topicLocation ) ) {
