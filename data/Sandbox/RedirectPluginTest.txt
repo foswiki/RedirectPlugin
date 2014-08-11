@@ -1,4 +1,4 @@
-%META:TOPICINFO{author="ProjectContributor" date="1182547552" format="1.1" version="$Rev$"}%
+%META:TOPICINFO{author="ProjectContributor" date="1407719189" format="1.1" version="1"}%
 ---+ %SYSTEMWEB%.RedirectPlugin Test Topic: origin
 
 %REDIRECT{"RedirectPluginDestination"}%
