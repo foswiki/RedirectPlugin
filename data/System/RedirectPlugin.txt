@@ -1,4 +1,4 @@
-%META:TOPICINFO{author="ProjectContributor" date="1407719186" format="1.1" version="1"}%
+%META:TOPICINFO{author="ProjectContributor" date="1182547552" format="1.1" version="1"}%
 <!--
    * Set SHORTDESCRIPTION = Create a redirect to another topic or website
 -->
@@ -78,7 +78,8 @@ If installed:
 |  Plugin Release: | %$RELEASE% |
 |  Plugin Version: | %$VERSION% |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
-|  25 Jun 2010: | (1.1) New release. Fixed Foswiki:Tasks/Item1527 - Foswiki:Main.ItaloValcy |
+|  04 Feb 2014: | (1.11) don't redirect coming from an edit - Foswiki:Main.MichaelDaum |
+|  25 Jun 2010: | (1.1) Fixed Foswiki:Tasks/Item1527 - Foswiki:Main.ItaloValcy |
 |  07 Mar 2010: | Added facility to dontcheck destination topic exists - Foswiki:Main.MartinCleaver |
 |  09 Apr 2009: | Ported to Foswiki as 1.0; Update documentation - Foswiki:Main.AndrewJones |
 |  24 Nov 2008: | Ability to display Wikipedia like "Redirected from..." - Foswiki:Main.AndrewJones |

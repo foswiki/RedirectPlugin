@@ -25,8 +25,8 @@ use vars
 
 use strict;
 
-our $VERSION           = '$Rev$';
-our $RELEASE           = '1.1';
+our $VERSION           = '1.11';
+our $RELEASE           = '1.11';
 our $SHORTDESCRIPTION  = 'Create a redirect to another topic or website.';
 our $NO_PREFS_IN_TOPIC = 1;
 our $pluginName        = 'RedirectPlugin';
@@ -82,6 +82,9 @@ sub REDIRECT {
         # do not redirect when param "redirect=no" is passed
         my $noredirect = $query->param( -name => 'noredirect' ) || '';
         return '' if $noredirect eq 'on';
+
+        # do not redirect when we come from an edit
+        return '' if defined($ENV{HTTP_REFERER}) && $ENV{HTTP_REFERER} =~ /\bedit\b/;
 
         $dest = Foswiki::Func::expandCommonVariables( $dest, $topic, $web );
 
