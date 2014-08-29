@@ -1,0 +1,8 @@
+*.swp
+RedirectPlugin.md5
+RedirectPlugin.sha1
+RedirectPlugin.tgz
+RedirectPlugin.txt
+RedirectPlugin.zip
+RedirectPlugin_installer
+RedirectPlugin_installer.pl
