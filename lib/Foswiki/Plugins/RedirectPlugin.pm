@@ -25,8 +25,8 @@ use vars
 
 use strict;
 
-our $VERSION           = '1.11';
-our $RELEASE           = '1.11';
+our $VERSION           = '1.12';
+our $RELEASE           = '1.12';
 our $SHORTDESCRIPTION  = 'Create a redirect to another topic or website.';
 our $NO_PREFS_IN_TOPIC = 1;
 our $pluginName        = 'RedirectPlugin';
@@ -73,7 +73,8 @@ sub REDIRECT {
         my $queryString = "";
         my $param;
         foreach my $param ( $query->param ) {
-            foreach my $value ( $query->param("$param") ) {
+        #SMELL This will drop multiple-instance parameters
+            foreach my $value ( scalar $query->param("$param") ) {
                 $queryString .= "&" if $queryString;
                 $queryString .= "$param=" . $value;
             }
