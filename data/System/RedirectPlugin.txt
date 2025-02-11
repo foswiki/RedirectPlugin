@@ -1,4 +1,5 @@
-%META:TOPICINFO{author="ProjectContributor" date="1739288812" format="1.1" version="1"}%---+!! Redirect Plugin
+%META:TOPICINFO{author="ProjectContributor" date="1739288812" format="1.1" version="1"}%
+---+!! %TOPIC%
 
 %FORMFIELD{"Description"}%
 
