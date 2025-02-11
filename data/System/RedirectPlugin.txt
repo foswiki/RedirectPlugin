@@ -1,4 +1,4 @@
-%META:TOPICINFO{author="ProjectContributor" date="1739287586" format="1.1" version="1"}%---+!! Redirect Plugin
+%META:TOPICINFO{author="ProjectContributor" date="1739288812" format="1.1" version="1"}%---+!! Redirect Plugin
 
 %FORMFIELD{"Description"}%
 
@@ -66,6 +66,7 @@ If installed:
 
 ---++ Change History
 %TABLE{columnwidths="7em" tablewidth="100%"}%
+|  11 Feb 2025: | (2.00) OO-rewrite; fixed order of query and anchor in redirect url |
 |  03 Jul 2015: | (1.12) Call cgi param in scalar context.  Foswiki:Main.GeorgeClark |
 |  04 Feb 2014: | (1.11) don't redirect coming from an edit - Foswiki:Main.MichaelDaum |
 |  25 Jun 2010: | (1.1) Fixed Foswiki:Tasks/Item1527 - Foswiki:Main.ItaloValcy |

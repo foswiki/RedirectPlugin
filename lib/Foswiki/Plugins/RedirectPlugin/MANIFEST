@@ -1,4 +1,9 @@
-data/System/RedirectPlugin.txt Documentation Topic
-lib/Foswiki/Plugins/RedirectPlugin.pm Plugin Modulde
-data/Sandbox/RedirectPluginTest.txt Test Topic
-data/Sandbox/RedirectPluginDestination.txt Test Topic
+!noci
+data/Sandbox/RedirectPluginDestination.txt 0644
+data/Sandbox/RedirectPluginTest.txt 0644
+data/System/RedirectPlugin.txt 0644
+lib/Foswiki/Plugins/RedirectPlugin/Core.pm 0644
+lib/Foswiki/Plugins/RedirectPlugin/DEPENDENCIES 0644
+lib/Foswiki/Plugins/RedirectPlugin/MANIFEST 0644
+lib/Foswiki/Plugins/RedirectPlugin.pm 0644
+templates/viewtopicactionbuttons.redirect.tmpl 0644
