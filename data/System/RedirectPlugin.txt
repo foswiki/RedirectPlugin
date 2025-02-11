@@ -1,10 +1,6 @@
-%META:TOPICINFO{author="ProjectContributor" date="1182547552" format="1.1" version="1"}%
-<!--
-   * Set SHORTDESCRIPTION = Create a redirect to another topic or website
--->
----+!! Redirect Plugin
+%META:TOPICINFO{author="ProjectContributor" date="1739287586" format="1.1" version="1"}%---+!! Redirect Plugin
 
-%SHORTDESCRIPTION%
+%FORMFIELD{"Description"}%
 
 I typically use this to make easy-to-type shortforms/acronyms of topic names.  For example:
 	* Actual content appears under =<nop>Main.LightweightDirectoryAccessProtocol=
@@ -65,19 +61,11 @@ If installed:
 
 %$INSTALL_INSTRUCTIONS%
 
----++ Plugin Files
+---++ Dependencies
+%$DEPENDENCIES%
 
-   | *File:* | *Description:* |
-%$MANIFEST%
-
----++ Plugin Info
-
-|  Plugin Author(s): | Foswiki:Main.AndrewJones |
-|  Previous Authos(s): | TWiki:Main/SteveMokris |
-|  License: | [[http://www.gnu.org/licenses/gpl.html][GPL (Gnu General Public License)]] |
-|  Plugin Release: | %$RELEASE% |
-|  Plugin Version: | %$VERSION% |
-|  Change History: | <!-- versions below in reverse order -->&nbsp; |
+---++ Change History
+%TABLE{columnwidths="7em" tablewidth="100%"}%
 |  03 Jul 2015: | (1.12) Call cgi param in scalar context.  Foswiki:Main.GeorgeClark |
 |  04 Feb 2014: | (1.11) don't redirect coming from an edit - Foswiki:Main.MichaelDaum |
 |  25 Jun 2010: | (1.1) Fixed Foswiki:Tasks/Item1527 - Foswiki:Main.ItaloValcy |
@@ -89,6 +77,15 @@ If installed:
 |  10 Aug 2006: | Ability to redirect to URL restored by TWiki:Main/ThomasWeigert. Also added support for URL parameters. Fixed a few bugs. |
 |  09 Jun 2006: | Dakar port by TWiki:Main/MeredithLesley |
 |  20 Jun 2003: | Initial version |
-|  Dependencies: | %$DEPENDENCIES% |
-|  Plugin Home: | http://foswiki.org/Extensions/%TOPIC% |
-|  Support: | http://foswiki.org/Support/%TOPIC% |
+
+
+%META:FORM{name="PackageForm"}%
+%META:FIELD{name="Author" title="Author" value="Andrew Jones, Steve Mokris"}%
+%META:FIELD{name="Copyright" title="Copyright" value="2009-2025 Foswiki Contributors"}%
+%META:FIELD{name="Description" title="Description" value="%25$SHORTDESCRIPTION%25"}%
+%META:FIELD{name="Home" title="Home" value="http://foswiki.org/Extensions/%TOPIC%"}%
+%META:FIELD{name="License" title="License" value="[[http://www.gnu.org/licenses/gpl.html][GPL (Gnu General Public License)]]"}%
+%META:FIELD{name="Release" title="Release" value="%$RELEASE%"}%
+%META:FIELD{name="Repository" title="Repository" value="https://github.com/foswiki/%TOPIC%"}%
+%META:FIELD{name="Support" title="Support" value="http://foswiki.org/Support/%TOPIC%"}%
+%META:FIELD{name="Version" title="Version" value="%$VERSION%"}%

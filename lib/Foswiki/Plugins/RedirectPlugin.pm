@@ -1,5 +1,6 @@
 # Foswiki RedirectPlugin
 #
+# Copyright (C) 2009 - 2025 Foswiki Contributors
 # Copyright (C) 2008 - 2009 Andrew Jones, andrewjones86@gmail.com
 # Copyright (C) 2006 Motorola, thomas.weigert@motorola.com
 # Copyright (C) 2006 Meredith Lesly, msnomer@spamcop.net
@@ -24,6 +25,7 @@ use vars
   qw( $VERSION $RELEASE $SHORTDESCRIPTION $pluginName $NO_PREFS_IN_TOPIC );
 
 use strict;
+use warnings;
 
 our $VERSION           = '1.12';
 our $RELEASE           = '1.12';
@@ -87,7 +89,7 @@ sub REDIRECT {
         # do not redirect when we come from an edit
         return '' if defined($ENV{HTTP_REFERER}) && $ENV{HTTP_REFERER} =~ /\bedit\b/;
 
-        $dest = Foswiki::Func::expandCommonVariables( $dest, $topic, $web );
+        $dest = Foswiki::Func::expandCommonVariables( $dest, $topic, $web ) if $dest =~ /%/; # SMELL: not required
 
         # redirect to URL
         if ( $dest =~ m/^http/ ) {
@@ -101,9 +103,9 @@ sub REDIRECT {
         # else: "topic" or "web.topic" notation
         # get the components and check if the topic exists
         my $topicLocation = "";
-        if ( $dest =~ /^((.*?)\.)*(.*?)(\#.*|\?.*|$)$/ ) {
-            $newWeb = $2 || $web || '';
-            $newTopic = $3 || '';
+        if ( $dest =~ /^(?:(.+)\.)?(.*?)(\#.*|\?.*)?$/ ) {
+            $newWeb = $1 || $web || '';
+            $newTopic = $2 || '';
 
             # ignore anchor and params here
             $topicLocation = "$newWeb.$newTopic";
@@ -126,7 +128,7 @@ sub REDIRECT {
             $anchor = $1;
         }
 
-        if ( $dest =~ /(\?.*)/ ) {
+        if ( $dest =~ /\?(.*)/ ) {
 
             #override url params
             $queryString = $1;
@@ -140,7 +142,7 @@ sub REDIRECT {
 
         # topic exists
         Foswiki::Func::redirectCgiQuery( $query,
-            Foswiki::Func::getViewUrl( $newWeb, $newTopic ) . $anchor . $q );
+            Foswiki::Func::getViewUrl( $newWeb, $newTopic ) . $q . $anchor );
 
     }
 
